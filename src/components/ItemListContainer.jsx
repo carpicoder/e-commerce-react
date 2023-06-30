@@ -13,18 +13,20 @@ const ItemListContainer = () => {
     const categoria = useParams().categoria;
 
     useEffect(() => {
-      
+
       const productosRef = collection(db, "productos");
       const q = categoria ? query(productosRef, where("categoria", "==", categoria)) : productosRef;
-      
+
       getDocs(q)
         .then((resp) => {
-          setProductos( resp.docs.map((doc) => {
-            return { ...doc.data(), id: doc.id}
-          }))
-        })
 
-      
+          setProductos(
+            resp.docs.map((doc) => {
+              return { ...doc.data(), id: doc.id }
+            })
+          )
+        })
+        
     }, [categoria])
     
     
